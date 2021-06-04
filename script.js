@@ -4,6 +4,7 @@ const playButton = document.getElementById('play');
 const downloadButton = document.getElementById('download');
 const screenButton = document.getElementById('screen');
 const snapshotButton = document.getElementById('snapshot');
+const recordDiv = document.querySelector('.record')
 
 const gumVideo = document.querySelector('video#gum');
 const recordedVideo = document.querySelector('video#recorded');
@@ -13,17 +14,23 @@ const filterSelect = document.querySelector('select#filter');
 let mediaRecorder;
 let recordedBlobs;
 //Download recorded stream
-downloadButton.addEventListener('click', () =>{
+const downloadFunc = () => {
     const buffer = new Blob(recordedBlobs, { type: "video/webm" });
     recordedVideo.src = window.URL.createObjectURL(buffer);
     console.log(recordedVideo.src);
     downloadButton.href = recordedVideo.src;
     downloadButton.download = "RecordedVideo.webm";
-})
+};
+
+downloadButton.addEventListener('click', downloadFunc);
 
 // Take snapshot and Filtered it
 snapshotButton.addEventListener('click', () => {
+    recordDiv.style.display = "block";
+    recordedVideo.style.display = "none";
+    canvas.style.display = "block"
     canvas.className = filterSelect.value;
+
     canvas.getContext('2d').drawImage(gumVideo, 0, 0, canvas.width, canvas.height);
 })
 
@@ -34,10 +41,20 @@ filterSelect.addEventListener('change', () => {
 
 // Play recorded stream
 playButton.addEventListener('click', () => {
-    const buffer = new Blob(recordedBlobs, {type: 'video/webm'});
-    recordedVideo.src = window.URL.createObjectURL(buffer);
-    recordedVideo.controls = true;
-    recordedVideo.play();
+    if(playButton.innerText === "Play"){
+        recordDiv.style.display = "block";
+        recordedVideo.style.display = "block";
+        canvas.style.display = "none";
+        playButton.innerText = "Stop";
+        const buffer = new Blob(recordedBlobs, {type: 'video/webm'});
+        recordedVideo.src = window.URL.createObjectURL(buffer);
+        recordedVideo.controls = true;
+        recordedVideo.play();
+    } else {
+        playButton.innerText = "Play";
+        recordedVideo.controls = true;
+        recordedVideo.pause();
+    }
 })
 
 const handleDataAvailable = (event) => {
@@ -60,7 +77,8 @@ const startRecording = () => {
 
     recordButton.textContent = 'Stop Recording';
     playButton.disabled = true;
-    downloadButton.disabled = true;
+    downloadButton.classList.add('empty');
+    downloadButton.removeEventListener('click', downloadFunc);
     snapshotButton.disabled = false;
 
     mediaRecorder.ondataavailable = handleDataAvailable;
@@ -70,7 +88,8 @@ const startRecording = () => {
 const stopRecording = () => {
     recordButton.textContent = 'Record';
     playButton.disabled = false;
-    downloadButton.disabled = false;
+    downloadButton.classList.remove('empty');
+    downloadButton.addEventListener('click', downloadFunc);
     mediaRecorder.stop();
 }
 
@@ -89,6 +108,7 @@ const handleSuccess = (stream) => {
     snapshotButton.disabled = false;
     window.stream = stream;
     gumVideo.srcObject = stream;
+    gumVideo.style.boxShadow = '0 0 0.5em hsl(0 0% 100% / 0.3)';
 }
 
 const init = () => {
@@ -113,10 +133,11 @@ startButton.addEventListener('click', () => {
         recordButton.disabled = true;
         snapshotButton.disabled = true;
         playButton.disabled = true;
-        downloadButton.disabled = true;
+        downloadButton.classList.add('empty');
+        downloadButton.removeEventListener('click', downloadFunc);
         gumVideo.srcObject = null;
         window.stream = null;
-        recordedVideo.style.display = 'none';
+        recordDiv.style.display = 'none';
         recordedVideo.src = null;
     }
 })
@@ -144,10 +165,11 @@ screenButton.addEventListener('click', () => {
         recordButton.disabled = true;
         snapshotButton.disabled = true;
         playButton.disabled = true;
-        downloadButton.disabled = true;
+        downloadButton.classList.add('empty');
+        downloadButton.removeEventListener('click', downloadFunc);
         gumVideo.srcObject = null;
         window.stream = null;
-        recordedVideo.style.display = 'none';
+        recordDiv.style.display = 'none';
         recordedVideo.src = null;
     }
 })

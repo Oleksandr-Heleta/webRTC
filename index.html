@@ -11,18 +11,27 @@
 
 <div id="container">
     <video id="gum" playsinline autoplay muted></video>
-    <video id="recorded" playsinline loop></video>
-    <canvas width="500" height="400"></canvas>
 
-    <div>
-        <button id="start">Start camera</button>
-        <button id="record" disabled>Record</button>
-        <button id="play" disabled>Play</button>
-        <a id="download" disabled>Download</a>
-        <button id="screen" >Share screen</button>
-        <button id="snapshot" disabled>Take snapshot</button>
-        <label for="filter">Filter: </label>
-        <select id="filter">
+
+    <div class="row">
+        <button id="start" class="neon-button green">Start camera</button>
+        <button id="record"  class="neon-button" disabled>Record</button>
+        <button id="screen"  class="neon-button green">Share screen</button>
+    </div>
+    <div class="record">
+        <video id="recorded" playsinline loop></video>
+        <canvas class="canvas" width="400" height="300"></canvas>
+    </div>
+    
+
+    <div class="row">
+        
+        <a id="download" class="neon-button empty" >Download</a>
+        <button id="play"  class="neon-button green" disabled>Play</button>
+        
+        <button id="snapshot"  class="neon-button"disabled>Take snapshot</button>
+        <label for="filter"  >Filter: </label>
+        <select id="filter" class="neon-button">
             <option value="none">None</option>
             <option value="blur">Blur</option>
             <option value="grayscale">Grayscale</option>
