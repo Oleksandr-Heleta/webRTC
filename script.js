@@ -127,6 +127,9 @@ const init = () => {
 startButton.addEventListener('click', () => {
     if(startButton.innerText === 'Start camera') {
         startButton.innerText = 'Stop camera';
+        if(screenButton.innerText === 'Stop share') {
+            screenButton.innerText = 'Share screen';
+        }
         init();
     } else {
         startButton.innerText = 'Start camera';
@@ -159,6 +162,9 @@ const initScreen = () => {
 screenButton.addEventListener('click', () => {
     if(screenButton.innerText === 'Share screen') {
         screenButton.innerText = 'Stop share';
+        if(startButton.innerText === 'Stop camera') {
+            startButton.innerText = 'Start camera';
+        } 
         initScreen();
     } else {
         screenButton.innerText = 'Share screen';
