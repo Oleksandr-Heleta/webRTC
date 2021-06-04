@@ -33,7 +33,7 @@ video {
 }
 .record{
     display: none;
-    height: 300px;
+    height: calc(var(--width) * 0.5625);
     margin: 0 auto;
     margin-bottom: 20px;
 }
@@ -105,7 +105,7 @@ canvas,
     position: relative;
   }
    
-.neon-button::before {
+/* .neon-button::before {
     pointer-events: none;
     content: "";
     position: absolute;
@@ -118,7 +118,7 @@ canvas,
     transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
     filter: blur(1em);
     opacity: 0.7;
-  }
+  } */
 
 
 .neon-button::after {
@@ -134,7 +134,9 @@ canvas,
     z-index: -1;
     transition: opacity 100ms linear;
   }
-  
+
+select:hover,
+select:focus,
 .neon-button:hover,
 .neon-button:focus {
     color: var(--clr-bg);
@@ -143,10 +145,10 @@ canvas,
     text-shadow: none;
   }
 
-.neon-button:hover::before,
+/* .neon-button:hover::before,
 .neon-button:focus::before {
     opacity: 1;
-  }
+  } */
 
 .neon-button:hover::after,
 .neon-button:focus::after {
@@ -163,9 +165,9 @@ canvas,
    box-shadow: inset 0 0 0.5em 0 var(--clr-green), 0 0 0.5em 0 var(--clr-green);
   }
 
-.green::before{
+/* .green::before{
     background: var(--clr-green);
-  }
+  } */
 
 .green::after{
     box-shadow: 0 0 2em 0.5em var(--clr-green);
@@ -181,7 +183,17 @@ canvas,
 select{
     background: none; 
     outline: none;
+    border: none;
+    color: var(--clr-neon);
+    font-family: "Balsamiq Sans", cursive;
+    text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+
   }
+.filt{
+ 
+   padding: 0.7rem; 
+
+}
 
 #download{
     display: block;

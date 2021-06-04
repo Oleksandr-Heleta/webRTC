@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,40 +8,44 @@
     <link rel="stylesheet" href="style.css" />
     <title>Document</title>
 </head>
+
 <body>
 
-<div id="container">
-    <video id="gum" playsinline autoplay muted></video>
+    <div id="container">
+        <video id="gum" playsinline autoplay muted></video>
 
 
-    <div class="row">
-        <button id="start" class="neon-button green">Start camera</button>
-        <button id="record"  class="neon-button" disabled>Record</button>
-        <button id="screen"  class="neon-button green">Share screen</button>
+        <div class="row">
+            <button id="start" class="neon-button green">Start camera</button>
+            <button id="record" class="neon-button" disabled>Record</button>
+            <button id="screen" class="neon-button green">Share screen</button>
+        </div>
+        <div class="record">
+            <video id="recorded" playsinline loop></video>
+            <canvas class="canvas" width="400" height="300"></canvas>
+        </div>
+
+
+        <div class="row">
+
+            <a id="download" class="neon-button empty">Download</a>
+            <button id="play" class="neon-button green" disabled>Play</button>
+
+            <button id="snapshot" class="neon-button" disabled>Take snapshot</button>
+            <div class="neon-button filt">
+                <label for="filter">Filter: </label>
+                <select id="filter">
+                    <option value="none">None</option>
+                    <option value="blur">Blur</option>
+                    <option value="grayscale">Grayscale</option>
+                    <option value="invert">Invert</option>
+                    <option value="sepia">Sepia</option>
+                </select>
+            </div>
+        </div>
     </div>
-    <div class="record">
-        <video id="recorded" playsinline loop></video>
-        <canvas class="canvas" width="400" height="300"></canvas>
-    </div>
-    
 
-    <div class="row">
-        
-        <a id="download" class="neon-button empty" >Download</a>
-        <button id="play"  class="neon-button green" disabled>Play</button>
-        
-        <button id="snapshot"  class="neon-button"disabled>Take snapshot</button>
-        <label for="filter"  >Filter: </label>
-        <select id="filter" class="neon-button">
-            <option value="none">None</option>
-            <option value="blur">Blur</option>
-            <option value="grayscale">Grayscale</option>
-            <option value="invert">Invert</option>
-            <option value="sepia">Sepia</option>
-        </select>
-    </div>
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
